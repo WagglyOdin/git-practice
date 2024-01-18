@@ -37,6 +37,7 @@ function openModal() {
 // function to update the modal content based on the current band
 function updateModalContent() {
 	document.getElementById('modalBandName').textContent = currentBand;
+	document.querySelector('.counter-display').value = count;
 }
 
 // when the user clicks on <span> (x), close the modal
@@ -66,9 +67,19 @@ counterMinusElem.addEventListener('click', () => {
 	updateDisplay();
 });
 
+counterDisplayElem.addEventListener('input', (event) => {
+	const inputVal = event.target.value;
+
+	if (!isNaN(inputVal)) {
+		count = parseInt(inputVal, 10);
+		updateDisplay();
+	}
+});
+
 function updateDisplay() {
 	counterDisplayElem.innerHTML = count;
 	counterMinusElem.disabled = count === 0;
+	document.querySelector('.counter-display').value = count;
 }
 
 // add event listener to the Buy Now button
