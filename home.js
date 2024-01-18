@@ -45,4 +45,11 @@ counterMinusElem.addEventListener('click', () => {
 
 function updateDisplay() {
 	counterDisplayElem.innerHTML = count;
+	counterMinusElem.disabled = count === 0;
 }
+
+let buyNowBtn = document.getElementById('buyNowBtn');
+
+buyNowBtn.addEventListener('click', () => {
+	alert(`You have bought ${count} tickets.`);
+});
