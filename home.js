@@ -1,23 +1,51 @@
-// get the button
-let btn = document.getElementById('ticketBtn');
-
-// get modal
+// get the buttons and modal
+let undeadBtn = document.getElementById('undeadTicketBtn');
+let gamestopBtn = document.getElementById('gamestopTicketBtn');
+let pokemonBtn = document.getElementById('pokemonTicketBtn');
 let modal = document.getElementById('ticketModal');
-
-// Get the <span> element that closes the modal
 let span = document.getElementsByClassName('close')[0];
+let buyNowBtn = document.getElementById('buyNowBtn');
+let counterDisplayElem = document.querySelector('.counter-display');
+let counterMinusElem = document.querySelector('.counter-minus');
+let counterPlusElem = document.querySelector('.counter-plus');
+let currentBand;
 
-// arrow function for button
-btn.onclick = () => {
-	modal.style.display = 'block';
+// add event listeners to the ticket buttons
+undeadBtn.onclick = () => {
+	currentBand = 'Undead Bois';
+	openModal();
 };
 
-// When the user clicks on <span> (x), close the modal
+gamestopBtn.onclick = () => {
+	currentBand = 'Gamestop Bois';
+	openModal();
+};
+
+pokemonBtn.onclick = () => {
+	currentBand = 'Pokemon Bois';
+	openModal();
+};
+
+// function to open the modal
+function openModal() {
+	modal.style.display = 'block';
+	updateModalContent();
+	count = 0;
+	updateDisplay();
+}
+
+// function to update the modal content based on the current band
+function updateModalContent() {
+	document.getElementById('modalBandName').textContent = currentBand;
+	document.querySelector('.counter-display').value = count;
+}
+
+// when the user clicks on <span> (x), close the modal
 span.onclick = () => {
 	modal.style.display = 'none';
 };
 
-// When the user clicks anywhere outside of the modal, close it
+// when the user clicks anywhere outside of the modal, close it
 window.onclick = (event) => {
 	if (event.target == modal) {
 		modal.style.display = 'none';
@@ -25,10 +53,6 @@ window.onclick = (event) => {
 };
 
 let count = 0;
-// get counter buttons
-let counterDisplayElem = document.querySelector('.counter-display');
-let counterMinusElem = document.querySelector('.counter-minus');
-let counterPlusElem = document.querySelector('.counter-plus');
 
 // counter logic
 updateDisplay();
@@ -43,13 +67,23 @@ counterMinusElem.addEventListener('click', () => {
 	updateDisplay();
 });
 
+counterDisplayElem.addEventListener('input', (event) => {
+	const inputVal = event.target.value;
+
+	if (!isNaN(inputVal)) {
+		count = parseInt(inputVal, 10);
+		updateDisplay();
+	}
+});
+
 function updateDisplay() {
 	counterDisplayElem.innerHTML = count;
 	counterMinusElem.disabled = count === 0;
+	document.querySelector('.counter-display').value = count;
 }
 
-let buyNowBtn = document.getElementById('buyNowBtn');
-
+// add event listener to the Buy Now button
 buyNowBtn.addEventListener('click', () => {
-	alert(`You have bought ${count} tickets.`);
+	alert(`You have bought ${count} tickets for ${currentBand}.`);
+	modal.style.display = 'none';
 });
