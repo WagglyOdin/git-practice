@@ -1,6 +1,6 @@
 // get the buttons and modal
 let undeadBtn = document.getElementById('undeadTicketBtn');
-let gamestopBtn = document.getElementById('gamestopTicketBtn');
+let gabbaBtn = document.getElementById('gabbaTicketBtn');
 let pokemonBtn = document.getElementById('pokemonTicketBtn');
 let modal = document.getElementById('ticketModal');
 let span = document.getElementsByClassName('close')[0];
@@ -17,7 +17,7 @@ undeadBtn.onclick = () => {
 };
 
 gamestopBtn.onclick = () => {
-	currentBand = 'Gamestop Bois';
+	currentBand = 'GabbaGhouls';
 	openModal();
 };
 
